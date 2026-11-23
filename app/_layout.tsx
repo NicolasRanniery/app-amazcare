@@ -33,6 +33,7 @@ export default function RootLayout() {
   const voiceInstructions = useSettingsStore((s) => s.voiceInstructions);
   const medications = useMedicationStore((s) => s.medications);
   const events = useMedicationStore((s) => s.events);
+  const { colors } = useAppTheme();
 
   // Inicializa comunicação com o gateway (Mock ou HTTP)
   React.useEffect(() => {
@@ -122,18 +123,16 @@ export default function RootLayout() {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#F4F7F4',
+          backgroundColor: colors.bgCanvas,
         }}
       >
-        <ActivityIndicator size="large" color="#0B5A25" />
-        <Text style={{ marginTop: 12, fontSize: 18, color: '#0A1C10' }}>
+        <ActivityIndicator size="large" color={colors.primary} />
+        <Text style={{ marginTop: 12, fontSize: 18, color: colors.textPrimary }}>
           Carregando AMAZCARE...
         </Text>
       </View>
     );
   }
-
-  const { colors } = useAppTheme();
 
   return (
     <>
