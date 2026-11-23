@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "AMAZCARE",
+    "slug": "app-amazcare",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "amazcare",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ufpa.amazcare"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F4F7F4",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.ufpa.amazcare",
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "@expo-google-fonts/atkinson-hyperlegible/AtkinsonHyperlegible_400Regular.ttf",
+            "@expo-google-fonts/atkinson-hyperlegible/AtkinsonHyperlegible_700Bold.ttf"
+          ]
+        }
+      ]
+    ]
+  }
+}

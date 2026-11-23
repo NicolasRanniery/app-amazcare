@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AMAZCARE</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#EEF5FA;--card:#fff;--tx:#10243A;--mut:#4A6078;--bl:#0B5CAD;--blt:#DCEBFA;--gr:#12805A;--grt:#D8F2E6;--rd:#B3261E;--rdt:#FBE1DF;--am:#8A5A00;--amt:#FFF0CC;--bd:#C9D8E6;--on:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1824;--card:#14263A;--tx:#EAF2FA;--mut:#A9BDD1;--bl:#6DB2F5;--blt:#17344F;--gr:#4CD6A0;--grt:#12392D;--rd:#FF8F87;--rdt:#4A1E1B;--am:#FFD27A;--amt:#46360F;--bd:#2A4560;--on:#08121C}}
+:root[data-theme="dark"]{--bg:#0C1824;--card:#14263A;--tx:#EAF2FA;--mut:#A9BDD1;--bl:#6DB2F5;--blt:#17344F;--gr:#4CD6A0;--grt:#12392D;--rd:#FF8F87;--rdt:#4A1E1B;--am:#FFD27A;--amt:#46360F;--bd:#2A4560;--on:#08121C}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--tx);font-size:19px;line-height:1.4}
+#app{max-width:520px;margin:0 auto;padding:16px 16px 110px}
+h1{font-size:30px;margin:4px 0 4px}h2{font-size:23px;margin:22px 0 10px}p{margin:4px 0}
+.mut{color:var(--mut);font-size:17px}
+.card{background:var(--card);border:2px solid var(--bd);border-radius:18px;padding:16px;margin:12px 0}
+.hero{background:var(--bl);color:var(--on);border:0}
+.hero .mut{color:inherit;opacity:.9}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.sp{justify-content:space-between}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{text-align:center;padding:12px 6px}.stat b{display:block;font-size:34px}
+.btn{min-height:56px;padding:12px 20px;border-radius:14px;border:2px solid var(--bl);background:var(--card);color:var(--bl);font:inherit;font-weight:700;cursor:pointer}
+.btn.p{background:var(--bl);color:var(--on)}.btn.g{background:var(--gr);border-color:var(--gr);color:var(--on)}.btn.d{border-color:var(--rd);color:var(--rd)}
+.btn.s{min-height:48px;padding:8px 14px;font-size:17px}.btn.w{width:100%}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:4px solid var(--am);outline-offset:2px}
+.chip{display:inline-block;padding:4px 12px;border-radius:99px;font-weight:700;font-size:16px;background:var(--blt);color:var(--bl)}
+.chip.registrada,.chip.ok{background:var(--grt);color:var(--gr)}.chip.atrasada,.chip.esgotado,.chip.off{background:var(--rdt);color:var(--rd)}
+.chip.andamento,.chip.baixo,.chip.esquecida{background:var(--amt);color:var(--am)}
+.tl{border-left:4px solid var(--bd);margin-left:10px;padding-left:16px}
+.tl .card{position:relative}.tl .card:before{content:"";position:absolute;left:-28px;top:22px;width:16px;height:16px;border-radius:50%;background:var(--bl);border:3px solid var(--bg)}
+.alert{background:var(--rdt);border:3px solid var(--rd);border-radius:18px;padding:16px;margin:12px 0}
+.alert h2{margin-top:0;color:var(--rd)}
+.steps{display:flex;gap:6px;margin:10px 0}.steps i{flex:1;height:10px;border-radius:5px;background:var(--bd)}.steps i.on{background:var(--gr)}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:2px solid var(--bd);display:flex;justify-content:center;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+nav div{display:flex;width:100%;max-width:520px}
+nav button{flex:1;background:none;border:0;font:inherit;font-size:14px;font-weight:700;color:var(--mut);min-height:60px;border-radius:12px;cursor:pointer}
+nav button span{display:block;font-size:24px}nav button.on{color:var(--bl);background:var(--blt)}
+nav button:focus-visible{outline:4px solid var(--am)}
+.box{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#1B4E7E;padding:12px;border-radius:20px}
+.dr{background:var(--card);border:2px solid var(--bd);border-radius:12px;padding:10px;min-height:150px}
+.dr.open{border-style:dashed;border-color:var(--am);background:var(--amt)}
+.dr small{display:block;color:var(--mut);font-size:15px}
+.led{display:inline-block;width:18px;height:18px;border-radius:50%;background:#9AA9B8;vertical-align:-3px;margin-right:6px}
+.led.l1{background:#FFC400;box-shadow:0 0 10px #FFC400}.led.l2{background:#FFC400;animation:bl 0.7s infinite}
+@keyframes bl{50%{opacity:.15}}@media (prefers-reduced-motion:reduce){.led.l2{animation:none;outline:3px dotted var(--am)}}
+label{display:block;font-weight:700;margin:12px 0 4px}
+input,select{width:100%;min-height:52px;font:inherit;padding:8px 12px;border-radius:12px;border:2px solid var(--bd);background:var(--card);color:var(--tx)}
+.bar{display:flex;align-items:flex-end;gap:8px;height:130px;margin-top:8px}.bar div{flex:1;text-align:center;font-size:14px}
+.bar b{display:block;background:var(--gr);border-radius:8px 8px 0 0;min-height:4px}
+.mod{position:fixed;inset:0;background:rgba(5,15,25,.7);overflow:auto;padding:16px;z-index:5}.mod>div{max-width:520px;margin:0 auto;background:var(--bg);border-radius:20px;padding:18px}
+#toast{position:fixed;left:16px;right:16px;bottom:calc(90px + env(safe-area-inset-bottom,0px));max-width:488px;margin:auto;background:var(--tx);color:var(--bg);padding:14px 18px;border-radius:14px;font-weight:700;z-index:9}
+.bg{height:12px;background:var(--bd);border-radius:6px;overflow:hidden;margin-top:8px}.bg i{display:block;height:100%;background:var(--gr)}
+.bg.baixo i{background:var(--am)}.bg.esgotado i{background:var(--rd)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const D=()=>new Date().toLocaleDateString("sv"),HM=()=>new Date().toTimeString().slice(0,5);
+const ST={pendente:"Pendente",andamento:"Em andamento",registrada:"Registrada",atrasada:"Atrasada",esquecida:"Esquecida"};
+function seed(){
+  const meds=[
+    {id:1,n:"Medicamento A",d:"500 mg",q:"1 comprimido",ts:["08:00"],s:"2026-01-01",e:"",g:1,st:30,mn:5},
+    {id:2,n:"Medicamento B",d:"50 mg",q:"1 comprimido",ts:["12:00"],s:"2026-01-01",e:"",g:2,st:20,mn:5},
+    {id:3,n:"Medicamento C",d:"100 mg",q:"1 comprimido",ts:["20:00"],s:"2026-01-01",e:"",g:3,st:10,mn:3}];
+  const log=[];
+  for(let k=1;k<=6;k++){const d=new Date(Date.now()-k*864e5).toLocaleDateString("sv");
+    meds.forEach((m,i)=>log.push({d,id:m.id,t:m.ts[0],s:(k*3+i)%7==0?"esquecida":"registrada",at:m.ts[0]}))}
+  return {meds,log};
+}
+let S;try{S=JSON.parse(localStorage.getItem("amaz1"))}catch(e){}
+if(!S||!S.meds)S=seed();
+const save=()=>{try{localStorage.setItem("amaz1",JSON.stringify(S))}catch(e){}};
+let scr="home",M=null,A=null,F={},fl={m:"all",p:7},toastT;
+let dev={wifi:true,open:[0,0,0,0,0,0],led:[0,0,0,0,0,0],bz:0,ev:[]};
+const $=s=>document.querySelector(s);
+const med=id=>S.meds.find(m=>m.id==id);
+function ev(t){dev.ev.unshift(HM()+" · "+t);dev.ev=dev.ev.slice(0,8)}
+function toast(t){clearTimeout(toastT);let e=$("#toast");if(!e){e=document.createElement("div");e.id="toast";e.setAttribute("role","status");document.body.appendChild(e)}e.textContent=t;toastT=setTimeout(()=>e.remove(),4500)}
+function doses(){const d=D(),r=[];S.meds.forEach(m=>{if(m.s<=d&&(!m.e||m.e>=d))m.ts.forEach(t=>r.push({m,t}))});return r.sort((a,b)=>a.t.localeCompare(b.t))}
+function status(m,t){const l=S.log.find(x=>x.d==D()&&x.id==m.id&&x.t==t);if(l)return l.s;if(A&&A.id==m.id&&A.t==t)return"andamento";return t<HM()?"atrasada":"pendente"}
+function stk(m){return m.st<=0?"esgotado":m.st<=m.mn?"baixo":"ok"}
+const SL={ok:"Estoque suficiente",baixo:"Estoque baixo",esgotado:"Estoque esgotado"};
+function resetDev(g){dev.led[g-1]=0;dev.bz=0}
+function startAlert(m,t){if(A)return;A={id:m.id,t,g:m.g,ph:"alerta"};dev.led[m.g-1]=1;dev.bz=1;ev("Horário de "+m.n+": LED "+m.g+" aceso e buzzer ligado");toast("Hora do remédio! Abra a gaveta "+m.g);render()}
+function openD(g){dev.open[g-1]=1;ev("Gaveta "+g+" aberta");
+  if(A){if(g==A.g&&A.ph=="alerta"){dev.bz=0;dev.led[g-1]=2;A.ph="aberta";ev("Gaveta correta: buzzer desligado, LED piscando")}
+  else if(g!=A.g){ev("Abertura incorreta: gaveta "+g);toast("Atenção: gaveta "+g+" aberta por engano. Abra a gaveta "+A.g+".")}}render()}
+function closeD(g){dev.open[g-1]=0;ev("Gaveta "+g+" fechada");if(A&&g==A.g&&A.ph=="aberta"){dev.led[g-1]=0;A.ph="fechada";ev("LED "+g+" apagado")}render()}
+function logDose(id,t,s){S.log.push({d:D(),id,t,s,at:HM()});if(A&&A.id==id&&A.t==t){resetDev(A.g);A=null}save();render()}
+function took(id,t){const m=med(id);m.st=Math.max(0,m.st-(parseInt(m.q)||1));logDose(id,t,"registrada");if(stk(m)!="ok")toast("Estoque de "+m.n+": "+SL[stk(m)].toLowerCase()+".")}
+function tick(){const c=$("#clk");if(c)c.textContent=HM();
+  if(!A)doses().forEach(x=>{const k=D()+x.m.id+x.t;if(x.t==HM()&&!F[k]&&status(x.m,x.t)!="registrada"){F[k]=1;startAlert(x.m,x.t)}})}
+setInterval(tick,1000);
+
+function go(s){scr=s;M=null;render();scrollTo(0,0)}
+function banner(){if(!A)return"";const m=med(A.id),p={alerta:2,aberta:4,fechada:5}[A.ph];
+  const msg={alerta:"Abra a gaveta "+A.g+". LED aceso e buzzer tocando.",aberta:"Gaveta correta aberta. Buzzer parou e o LED pisca. Pegue o remédio e feche a gaveta.",fechada:"Gaveta fechada. Confirme se tomou o remédio."}[A.ph];
+  return `<div class="alert" role="alert"><h2>⏰ ${m.n} · ${A.t}</h2><p><b>${msg}</b></p><p class="mut">${m.d} · ${m.q}</p>
+  <div class="steps">${[1,2,3,4,5].map(i=>`<i class="${i<=p?"on":""}"></i>`).join("")}</div>
+  <p class="mut">${["","Horário identificado","Gaveta "+A.g+" destacada","Abertura detectada","Evento registrado","Fechamento detectado"][p]}</p>
+  <div class="row">${A.ph=="alerta"?`<button class="btn p" onclick="openD(${A.g})">Simular: abrir gaveta ${A.g}</button>`:""}
+  ${A.ph=="aberta"?`<button class="btn p" onclick="closeD(${A.g})">Simular: fechar gaveta ${A.g}</button>`:""}
+  ${A.ph=="fechada"?`<button class="btn g" onclick="took(${m.id},'${A.t}')">✔ Marcar como tomado</button>`:""}
+  <button class="btn d" onclick="logDose(${m.id},'${A.t}','esquecida')">Não tomei</button></div></div>`}
+function home(){const L=doses(),n=new Date(),h=n.getHours(),sd=L.map(x=>status(x.m,x.t)),
+  ok=sd.filter(s=>s=="registrada").length,pe=sd.filter(s=>s!="registrada"&&s!="esquecida").length,nx=L.find(x=>["pendente","atrasada","andamento"].includes(status(x.m,x.t)));
+  return `<h1>${h<12?"Bom dia":h<18?"Boa tarde":"Boa noite"}!</h1><p class="mut">${n.toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"})} · <b id="clk">${HM()}</b></p>
+  <div class="card hero"><p class="mut">Próximo medicamento</p>${nx?`<h2 style="margin:4px 0">${nx.m.n}</h2><p>${nx.m.d} · ${nx.m.q}</p><p style="font-size:26px"><b>às ${nx.t}</b></p><p style="font-size:24px;margin-top:8px">📦 <b>Abra a gaveta ${nx.m.g}</b></p>`:`<h2 style="margin:4px 0">Tudo em dia ✔</h2><p>Nenhuma dose pendente hoje.</p>`}</div>
+  ${banner()}
+  <div class="grid3"><div class="card stat"><b>${L.length}</b>programados</div><div class="card stat"><b style="color:var(--gr)">${ok}</b>tomados</div><div class="card stat"><b style="color:var(--am)">${pe}</b>pendentes</div></div>
+  <div class="card row sp"><div><b>Caixa AMAZCARE</b><p class="mut">${dev.wifi?"Conectada ao Wi-Fi":"Sem conexão"}</p></div><span class="chip ${dev.wifi?"ok":"off"}">${dev.wifi?"Conectada":"Desconectada"}</span></div>
+  <button class="btn p w" onclick="go('rot')">Ver rotina de hoje</button>
+  <button class="btn w" style="margin-top:10px" onclick="go('his')">Ver histórico</button>`}
+function rot(){const L=doses();return `<h1>Rotina de hoje</h1>${banner()}
+  ${A?"":`<button class="btn w" onclick="const x=doses().find(x=>['pendente','atrasada'].includes(status(x.m,x.t)));x?startAlert(x.m,x.t):toast('Não há doses pendentes.')">▶ Simular chegada do horário</button>`}
+  <div class="tl" style="margin-top:14px">${L.map(x=>{const s=status(x.m,x.t);return `<div class="card"><div class="row sp"><b style="font-size:26px">${x.t}</b><span class="chip ${s}">${ST[s]}</span></div>
+  <p><b>${x.m.n}</b> · ${x.m.d}</p><p class="mut">${x.m.q} · Gaveta ${x.m.g}</p>
+  ${s=="pendente"||s=="atrasada"?`<button class="btn d s" onclick="logDose(${x.m.id},'${x.t}','esquecida')">Registrar esquecimento</button>`:""}</div>`}).join("")||'<p class="mut">Nenhum remédio programado para hoje.</p>'}</div>`}
+function meds(){return `<h1>Meus remédios</h1><button class="btn p w" onclick="form()">＋ Adicionar remédio</button>
+  ${S.meds.map(m=>`<div class="card"><div class="row sp"><b style="font-size:24px">${m.n}</b><span class="chip">Gaveta ${m.g}</span></div>
+  <p>${m.d} · ${m.q}</p><p class="mut">Horários: ${m.ts.join(", ")}</p>
+  <div class="row" style="margin-top:8px"><button class="btn s" onclick="form(${m.id})">✎ Editar</button><button class="btn d s" onclick="delAsk(${m.id})">Excluir</button></div></div>`).join("")||'<p class="mut">Nenhum remédio cadastrado.</p>'}`}
+function form(id){const m=id?med(id):{n:"",d:"",q:"1 comprimido",ts:["08:00"],s:D(),e:"",g:1,st:30,mn:5};
+  const f=(i,l,v,t="text")=>`<label for="${i}">${l}</label><input id="${i}" type="${t}" value="${v}">`;
+  M=`<h2 style="margin-top:0">${id?"Editar":"Novo"} remédio</h2>${f("fn","Nome",m.n)}${f("fd","Dosagem (ex.: 500 mg)",m.d)}${f("fq","Quantidade por dose",m.q)}${f("ft","Horários (separe por vírgula)",m.ts.join(", "))}
+  ${f("fs","Início do tratamento",m.s,"date")}${f("fe","Término (opcional)",m.e,"date")}
+  <label for="fg">Gaveta</label><select id="fg">${[1,2,3,4,5,6].map(g=>`<option ${g==m.g?"selected":""}>${g}</option>`).join("")}</select>
+  ${f("fst","Estoque disponível",m.st,"number")}${f("fm","Avisar quando restar até",m.mn,"number")}<p id="fer" style="color:var(--rd);font-weight:700"></p>
+  <div class="row"><button class="btn g" onclick="saveMed(${id||0})">Salvar</button><button class="btn" onclick="M=null;render()">Cancelar</button></div>`;render()}
+function saveMed(id){const v=i=>$("#"+i).value.trim(),ts=v("ft").split(/[,\s]+/).filter(Boolean),g=+v("fg"),er=$("#fer");
+  if(!v("fn")||!v("fd"))return er.textContent="Preencha o nome e a dosagem.";
+  if(!ts.length||ts.some(t=>!/^([01]\d|2[0-3]):[0-5]\d$/.test(t)))return er.textContent="Use horários como 08:00, 20:00.";
+  if(S.meds.some(m=>m.g==g&&m.id!=id))return er.textContent="A gaveta "+g+" já está em uso por outro remédio.";
+  const o={id:id||Date.now(),n:v("fn"),d:v("fd"),q:v("fq")||"1 comprimido",ts:ts.sort(),s:v("fs")||D(),e:v("fe"),g,st:+v("fst")||0,mn:+v("fm")||0};
+  if(id)S.meds[S.meds.findIndex(m=>m.id==id)]=o;else S.meds.push(o);M=null;save();render();toast("Remédio salvo.")}
+function delAsk(id){M=`<h2 style="margin-top:0">Excluir ${med(id).n}?</h2><p>Essa ação remove o remédio e sua programação.</p><div class="row"><button class="btn d" onclick="delMed(${id})">Sim, excluir</button><button class="btn" onclick="M=null;render()">Cancelar</button></div>`;render()}
+function delMed(id){S.meds=S.meds.filter(m=>m.id!=id);if(A&&A.id==id){resetDev(A.g);A=null}M=null;save();render()}
+function est(){return `<h1>Estoque</h1><p class="mut">Quantidade estimada: o sensor da caixa só detecta abrir e fechar gavetas. Ajuste manualmente quando precisar.</p>
+  ${S.meds.map(m=>{const s=stk(m);return `<div class="card"><div class="row sp"><b style="font-size:23px">${m.n}</b><span class="chip ${s}">${SL[s]}</span></div>
+  <p>Estimado: <b>${m.st}</b> · Mínimo: ${m.mn} · Gaveta ${m.g}</p><div class="bg ${s}"><i style="width:${Math.min(100,m.st/Math.max(m.mn*4,1)*100)}%"></i></div>
+  <div class="row" style="margin-top:10px"><button class="btn g s" onclick="stkForm(${m.id},1)">＋ Adicionar unidades</button><button class="btn s" onclick="stkForm(${m.id},0)">Ajustar estoque</button></div></div>`}).join("")}`}
+function stkForm(id,add){const m=med(id);M=`<h2 style="margin-top:0">${add?"Adicionar unidades":"Ajustar estoque"}</h2><p>${m.n} · estimado: ${m.st}</p><label for="sv">${add?"Quantos comprimidos entraram?":"Quantidade correta agora"}</label><input id="sv" type="number" min="0" value="${add?10:m.st}">
+  <div class="row" style="margin-top:14px"><button class="btn g" onclick="stkSave(${id},${add})">Salvar</button><button class="btn" onclick="M=null;render()">Cancelar</button></div>`;render()}
+function stkSave(id,add){const m=med(id),v=Math.max(0,+$("#sv").value||0);m.st=add?m.st+v:v;M=null;save();render();if(stk(m)!="ok")toast("Atenção: "+SL[stk(m)].toLowerCase()+" para "+m.n+".")}
+function his(){const lim=new Date(Date.now()-(fl.p-1)*864e5).toLocaleDateString("sv"),
+  L=S.log.filter(x=>x.d>=lim&&(fl.m=="all"||x.id==fl.m)).sort((a,b)=>(b.d+b.at).localeCompare(a.d+a.at)),
+  ok=L.filter(x=>x.s=="registrada").length,pc=L.length?Math.round(ok/L.length*100):0,days=[];
+  for(let k=6;k>=0;k--){const d=new Date(Date.now()-k*864e5).toLocaleDateString("sv"),x=S.log.filter(l=>l.d==d&&(fl.m=="all"||l.id==fl.m)),p=x.length?Math.round(x.filter(l=>l.s=="registrada").length/x.length*100):0;
+    days.push(`<div><b style="height:${p*1.1}px"></b>${p}%<br>${d.slice(8)}/${d.slice(5,7)}</div>`)}
+  return `<h1>Histórico</h1><div class="row"><div style="flex:1"><label for="hm">Remédio</label><select id="hm" onchange="fl.m=this.value;render()"><option value="all">Todos</option>${S.meds.map(m=>`<option value="${m.id}" ${fl.m==m.id?"selected":""}>${m.n}</option>`).join("")}</select></div>
+  <div style="flex:1"><label for="hp">Período</label><select id="hp" onchange="fl.p=+this.value;render()">${[[1,"Hoje"],[7,"7 dias"]].map(o=>`<option value="${o[0]}" ${fl.p==o[0]?"selected":""}>${o[1]}</option>`).join("")}</select></div></div>
+  <div class="card"><p class="mut">Adesão no período</p><b style="font-size:40px;color:var(--gr)">${pc}%</b><p class="mut">${ok} de ${L.length} doses registradas</p>
+  <p class="mut" style="margin-top:12px">Adesão diária, últimos 7 dias</p><div class="bar">${days.join("")}</div></div>
+  ${L.map(x=>`<div class="card row sp"><div><b>${(med(x.id)||{n:"Removido"}).n}</b><p class="mut">${x.d.split("-").reverse().join("/")} · programado ${x.t} · registro ${x.at}</p></div><span class="chip ${x.s}">${ST[x.s]}</span></div>`).join("")||'<p class="mut">Nenhum evento neste filtro.</p>'}`}
+function cx(){return `<h1>Caixa AMAZCARE</h1>${banner()}
+  <div class="box">${[1,2,3,4,5,6].map(g=>{const m=S.meds.find(x=>x.g==g),o=dev.open[g-1];return `<div class="dr ${o?"open":""}"><b>Gaveta ${g}</b><small>${m?m.n:"Livre"}</small>
+  <p style="margin:6px 0"><span class="led l${dev.led[g-1]}"></span>${["LED apagado","LED aceso","LED piscando"][dev.led[g-1]]}</p><small>${o?"Aberta":"Fechada"}</small>
+  <div class="row" style="margin-top:6px"><button class="btn s" onclick="${o?"closeD":"openD"}(${g})">${o?"Fechar":"Abrir"}</button><button class="btn s" onclick="dev.led[${g}-1]=dev.led[${g}-1]?0:1;render()">LED</button></div></div>`}).join("")}</div>
+  <div class="card"><div class="row sp"><span>Wi-Fi</span><span class="chip ${dev.wifi?"ok":"off"}">${dev.wifi?"Conectado":"Desconectado"}</span></div>
+  <div class="row sp" style="margin-top:8px"><span>ESP32</span><span class="chip ${dev.wifi?"ok":"off"}">${dev.wifi?"Online":"Offline"}</span></div>
+  <div class="row sp" style="margin-top:8px"><span>Horário sincronizado</span><b>${dev.wifi?HM():"—"}</b></div>
+  <div class="row sp" style="margin-top:8px"><span>Buzzer</span><span class="chip ${dev.bz?"andamento":""}">${dev.bz?"Tocando":"Desligado"}</span></div>
+  <div class="row" style="margin-top:12px"><button class="btn s" onclick="dev.wifi=!dev.wifi;ev(dev.wifi?'ESP32 conectado ao Wi-Fi':'ESP32 desconectado');render()">${dev.wifi?"Simular queda do Wi-Fi":"Simular reconexão"}</button><button class="btn s" onclick="dev.bz=dev.bz?0:1;ev('Buzzer '+(dev.bz?'ligado':'desligado'));render()">Buzzer</button></div></div>
+  <h2>Mensagens simuladas do ESP32</h2><div class="card">${dev.ev.map(e=>`<p class="mut">${e}</p>`).join("")||'<p class="mut">Nenhum evento ainda. Abra uma gaveta ou simule um horário na Rotina.</p>'}</div>`}
+const TABS=[["home","🏠","Início"],["rot","📅","Rotina"],["meds","💊","Remédios"],["est","📦","Estoque"],["cx","📟","Caixa"]];
+function render(){const V={home,rot,meds,est,his,cx}[scr]();
+  $("#app").innerHTML=V+`<nav aria-label="Principal"><div>${TABS.map(t=>`<button class="${scr==t[0]?"on":""}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join("")}</div></nav>`+(M?`<div class="mod" role="dialog" aria-modal="true"><div>${M}</div></div>`:"")}
+render();
+</script>
+</body>
+</html>
